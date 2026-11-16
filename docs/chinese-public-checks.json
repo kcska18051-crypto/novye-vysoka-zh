@@ -1,0 +1,41 @@
+{
+  "url": "https://kcska18051-crypto.github.io/novye-vysoka-zh/",
+  "results": [
+    {
+      "width": 320,
+      "passed": true,
+      "routes": 12,
+      "plans": 4,
+      "gallery": 9,
+      "errors": [],
+      "posts": []
+    },
+    {
+      "width": 390,
+      "passed": true,
+      "routes": 12,
+      "plans": 4,
+      "gallery": 9,
+      "errors": [],
+      "posts": []
+    },
+    {
+      "width": 768,
+      "passed": true,
+      "routes": 12,
+      "plans": 4,
+      "gallery": 9,
+      "errors": [],
+      "posts": []
+    },
+    {
+      "width": 1440,
+      "passed": true,
+      "routes": 12,
+      "plans": 4,
+      "gallery": 9,
+      "errors": [],
+      "posts": []
+    }
+  ]
+}

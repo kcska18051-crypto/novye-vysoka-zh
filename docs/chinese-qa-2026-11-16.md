@@ -13,3 +13,9 @@ Source: novye-vysoka-design @ c2516d796b47fd7a633923592bf299eef906f7ab. Original
 - Photos, footage, contacts and external references preserved. Real photographed signage and third-party website/player language remain controlled by their original sources.
 
 Browser results: chinese-browser-checks.json. Browser automation: tools/verify-chinese-browser.cjs.
+
+## Publication verified
+
+GitHub Pages status: built. Public URL: https://kcska18051-crypto.github.io/novye-vysoka-zh/.
+The complete browser acceptance check was repeated against this PUBLIC URL at all four widths; every scenario passed without JS/HTTP errors or submissions. Results: chinese-public-checks.json.
+Original Russian remote refs rechecked after publication: codex/design c2516d796b47fd7a633923592bf299eef906f7ab; codex/pages 729847d0ba627d3d57ccbc39a635258334049104. Both unchanged.
