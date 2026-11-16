@@ -9,12 +9,12 @@ const script = fs.readFileSync(path.join(root, 'dist', 'app.js'), 'utf8');
 const css = fs.readFileSync(path.join(root, 'dist', 'styles.css'), 'utf8');
 
 test('header identifies Novye Vysoka as a Magazin Zemli project', () => {
-  assert.match(html, /class="brand-project"[^>]*>\s*проект «Новые Высока»\s*</i);
+  assert.match(html, /class="brand-project"[^>]*>\s*新维索卡项目\s*</i);
 });
 
-test('hero offers two concrete lead actions', () => {
-  assert.match(html, /data-lead-intent="selection"[^>]*>Подобрать участок</i);
-  assert.match(html, /data-lead-intent="tour"[^>]*>Записаться на экскурсию</i);
+test('hero offers land selection and an accessible location preview', () => {
+  assert.match(html, /data-lead-intent="selection"[^>]*>选择地块</i);
+  assert.match(html, /href="assets\/situation-plan-zh\.svg" aria-haspopup="dialog" aria-controls="situation-plan-dialog">查看位置</i);
 });
 
 test('reusable lead dialog supports selection and tour intents', () => {
@@ -35,10 +35,10 @@ test('redundant section overlines are removed', () => {
   assert.doesNotMatch(html, /class="section-label"/i);
 });
 
-test('desktop header keeps five key links and a persistent selection action', () => {
-  const nav = html.match(/<nav aria-label="Разделы страницы">([\s\S]*?)<\/nav>/i)?.[1] || '';
-  assert.equal((nav.match(/<a /g) || []).length, 5);
-  for (const label of ['О проекте', 'Как здесь жить', 'Кварталы', 'Покупка', 'Команда']) assert.match(nav, new RegExp(label));
+test('desktop header keeps six key links and a persistent selection action', () => {
+  const nav = html.match(/<nav aria-label="页面导航">([\s\S]*?)<\/nav>/i)?.[1] || '';
+  assert.equal((nav.match(/<a /g) || []).length, 6);
+  for (const label of ['项目介绍', '乡居生活', '交通路线', '地块', '购地条件', '团队介绍']) assert.match(nav, new RegExp(label));
   assert.match(html, /class="header-cta"[^>]+data-lead-intent="selection"/);
 });
 
@@ -51,26 +51,26 @@ test('faq starts closed and both accordions expose controlled state', () => {
 });
 
 test('lead choices are visible selectable cards and footer includes legal navigation', () => {
-  assert.match(html, /Приехать посмотреть/);
-  assert.match(html, /Получить видео участка/);
+  assert.match(html, /实地参观/);
+  assert.match(html, /获取地块视频/);
   assert.match(html, /class="footer-legal"/);
   assert.match(html, /landmarket\.biz\/privacy/);
 });
 
 test('final form names the result of the selected action', () => {
-  assert.match(html, /data-tour-submit[^>]*>Записаться на экскурсию/);
+  assert.match(html, /data-tour-submit[^>]*>预约看地/);
   assert.match(script, /syncTourSubmit/);
-  assert.match(script, /Получить видео участка/);
+  assert.match(script, /获取地块视频/);
 });
 
 test('company reasons address five distinct buyer concerns', () => {
-  for (const reason of ['Юридическая прозрачность', 'Покупка напрямую', 'Знание территории', 'Сопровождение сделки', 'Рассрочка от собственника']) {
+  for (const reason of ['法律信息透明', '直接购买', '熟悉当地', '全程交易协助', '业主提供分期付款']) {
     assert.match(html, new RegExp(reason));
   }
 });
 
 test('faq covers ownership, access, viewing, and purchase terms in concise answers', () => {
-  for (const question of ['Кто продаёт участки?', 'Как устроен подъезд к участкам?', 'Можно ли приехать и посмотреть участок?', 'Как предоставляется рассрочка?']) {
+  for (const question of ['地块由谁出售？', '地块的进出道路情况如何？', '可以实地看地吗？', '分期付款如何安排？']) {
     assert.match(html, new RegExp(question.replace(/[?]/g, '\\?')));
   }
   const faq = html.match(/<div class="faq-list reveal"[\s\S]*?<\/div>\s*<\/section>/)?.[0] || '';
@@ -90,8 +90,8 @@ test('journey supports explicit controls, directional transitions, and adjacent 
 test('project image stays clean without technical notes or connector artifacts', () => {
   assert.equal((html.match(/class="project-hotspot/g) || []).length, 0);
   assert.doesNotMatch(html, /class="visual-note"/);
-  assert.doesNotMatch(html, /Ориентировочная схема направления/);
-  assert.doesNotMatch(html, /Временный звук из референса/);
+  assert.doesNotMatch(html, /方向示意图/);
+  assert.doesNotMatch(html, /参考素材中的临时音频/);
   assert.doesNotMatch(css, /\.purchase-steps::before/);
 });
 

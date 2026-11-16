@@ -2,7 +2,7 @@
   const root = document.querySelector('.quarter-explorer');
   if (!root) return;
   const $ = s => root.querySelector(s);
-  const quarters = {degtyaritsy:'Дегтярицы',nikolo:'Николо-Корма',vysoka:'Новые Высока',chernaya:'Чёрная речка'};
+  const quarters = {degtyaritsy:'杰格佳里齐',nikolo:'尼科洛科尔马',vysoka:'新维索卡',chernaya:'黑河'};
   const overview=$('#qe-overview'),detail=$('#qe-detail'),viewer=$('.qe-viewer'),plan=$('#qe-plan');
   let scale=1,x=0,y=0;
   const pointers=new Map(); let gesture=null;
@@ -26,15 +26,15 @@
     if(busy)return;busy=true;activeTrigger=trigger;
     const id=trigger.dataset.quarter,name=quarters[id];
     $('#qe-detail-title').textContent=name;
-    plan.loading='eager';plan.src=id==='chernaya'?'assets/quarter-overview/chernaya-plan-20261028.jpg':`assets/quarter-overview/${id}-plan.png`;plan.alt=`Исходный генплан квартала «${name}»`;
-    viewer.setAttribute('aria-label',`Генплан квартала «${name}». Масштаб: плюс и минус. Перемещение: стрелки или перетаскивание.`);
+    plan.loading='eager';plan.src=id==='chernaya'?'assets/quarter-overview/chernaya-plan-20261028.jpg':(['degtyaritsy','nikolo'].includes(id)?`assets/quarter-overview/${id}-plan-zh.svg`:`assets/quarter-overview/${id}-plan.png`);plan.alt=`分区原始总平面图 «${name}»`;
+    viewer.setAttribute('aria-label',`分区总平面图 «${name}»。缩放：加号和减号。移动：方向键或拖动。`);
     const price=priceData[id];$('.qe-price').hidden=!price;
-    if(price)$('.qe-price').innerHTML=`от ${price.toLocaleString('ru-RU')} ₽<span>за сотку</span>`;
+    if(price)$('.qe-price').innerHTML=`${price.toLocaleString('zh-CN')} 卢布起<span>每100平方米</span>`;
     $('.qe-key').hidden=!['degtyaritsy','nikolo'].includes(id);
-    if(price)$('.qe-key p').lastChild.textContent=`от ${price.toLocaleString('ru-RU')} ₽/сотка`;
+    if(price)$('.qe-key p').lastChild.textContent=`${price.toLocaleString('zh-CN')} 卢布起/100平方米`;
     $('.qe-key p:last-child').hidden=id!=='degtyaritsy';
     $('[data-plan-quarter]').dataset.planQuarter=name;
-    $('#qe-pdf').href=`assets/quarter-overview/${id}-plan.pdf`;$('#qe-pdf').download=`${name} — генплан.pdf`;
+    $('#qe-pdf').href=`assets/quarter-overview/${id}-plan.pdf`;$('#qe-pdf').download=`${name} — 总平面图.pdf`;
     detail.hidden=false;detail.showModal();
     document.body.style.overflow='hidden';
     scale=1;x=y=0;paint();
@@ -71,6 +71,6 @@
     const trigger=e.target.closest('[data-lead-intent]');if(!trigger)return;
     const form=document.querySelector('[data-lead-form]');if(!form)return;
     form.querySelector('[data-selected-quarter]')?.remove();
-    if(trigger.dataset.planQuarter){const field=document.createElement('input');field.type='hidden';field.name='quarter';field.value=trigger.dataset.planQuarter;field.dataset.selectedQuarter='';form.append(field);document.querySelector('#lead-dialog-title').textContent=`Подобрать участок — ${field.value}`;}
+    if(trigger.dataset.planQuarter){const field=document.createElement('input');field.type='hidden';field.name='quarter';field.value=trigger.dataset.planQuarter;field.dataset.selectedQuarter='';form.append(field);document.querySelector('#lead-dialog-title').textContent=`为您选地 — ${field.value}`;}
   });
 })();

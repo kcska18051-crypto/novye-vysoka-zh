@@ -2,8 +2,8 @@
   const root = document.querySelector('.hero-preview');
   if (!root) return;
   const choices = [
-    {src:'assets/client-october/hero-beach.webp',mobile:'assets/client-october/hero-beach-mobile.webp',alt:'Песчаный берег, вода и сосновый лес'},
-    {src:'assets/forest-v2/hero.webp',alt:'Образ загородного дома среди сосен у воды'}
+    {src:'assets/client-october/hero-beach.webp',mobile:'assets/client-october/hero-beach-mobile.webp',alt:'沙岸、水面与松林'},
+    {src:'assets/forest-v2/hero.webp',alt:'水边松林中的乡居概念图'}
   ];
   const buttons = [...root.querySelectorAll('[data-hero-option]')];
   const reduced = matchMedia('(prefers-reduced-motion:reduce)');

@@ -16,7 +16,7 @@ test('category filter returns matching items and invalid filter falls back to al
 
 test('item lookup returns an item or null', () => {
   const model = require('../dist/interactive-map-model.js');
-  assert.equal(model.getItemById(data, 'bus-stop').name, 'Остановка «Дегтярицы»');
+  assert.equal(model.getItemById(data, 'bus-stop').name, '“杰格佳里齐”公交站');
   assert.equal(model.getItemById(data, 'does-not-exist'), null);
 });
 
@@ -31,7 +31,7 @@ test('card model distinguishes quarters and supplies safe media fallbacks', () =
   const quarter = model.getCardModel(data.quarters[0]);
   const school = model.getCardModel(data.objects.find((item) => item.id === 'school'));
   assert.equal(quarter.kind, 'quarter');
-  assert.equal(quarter.metrics.free, 'По запросу');
+  assert.equal(quarter.metrics.free, '请咨询');
   assert.equal(school.kind, 'object');
   assert.equal(school.image, 'assets/territory-panorama.jpg');
 });

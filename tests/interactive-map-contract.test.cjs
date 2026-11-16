@@ -16,14 +16,15 @@ test('loads interactive map assets in dependency order', () => {
   assert.ok(data > 0 && model > data && controller > model);
 });
 
-test('replaces static quarter grid with an accessible map shell', () => {
+test('provides the current accessible zoomable quarter explorer', () => {
   assert.doesNotMatch(html, /class="quarter-grid/);
   assert.doesNotMatch(html, /class="plan-draft/);
-  assert.match(html, /data-interactive-map/);
-  assert.match(html, /data-map-filters/);
-  assert.match(html, /data-map-markers/);
-  assert.match(html, /data-map-card/);
-  assert.match(html, /data-map-object-list/);
+  assert.match(html, /class="quarter-explorer section"/);
+  assert.match(html, /class="qe-map-viewport" tabindex="0" role="region" aria-label="[^" ]+/);
+  assert.equal((html.match(/role="button" tabindex="0" data-map-quarter=/g) || []).length, 4);
+  for (const id of ['qe-map-minus', 'qe-map-reset', 'qe-map-plus']) assert.ok(html.includes(`id="${id}"`));
+  assert.match(html, /id="qe-quarter-popup" role="region" aria-label="已选片区" hidden/);
+  assert.match(html, /<dialog id="qe-detail" aria-labelledby="qe-detail-title" hidden>/);
   assert.match(html, /aria-live="polite"/);
 });
 

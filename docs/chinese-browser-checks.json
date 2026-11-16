@@ -1,0 +1,41 @@
+{
+  "url": "http://127.0.0.1:4179/",
+  "results": [
+    {
+      "width": 320,
+      "passed": true,
+      "routes": 12,
+      "plans": 4,
+      "gallery": 9,
+      "errors": [],
+      "posts": []
+    },
+    {
+      "width": 390,
+      "passed": true,
+      "routes": 12,
+      "plans": 4,
+      "gallery": 9,
+      "errors": [],
+      "posts": []
+    },
+    {
+      "width": 768,
+      "passed": true,
+      "routes": 12,
+      "plans": 4,
+      "gallery": 9,
+      "errors": [],
+      "posts": []
+    },
+    {
+      "width": 1440,
+      "passed": true,
+      "routes": 12,
+      "plans": 4,
+      "gallery": 9,
+      "errors": [],
+      "posts": []
+    }
+  ]
+}

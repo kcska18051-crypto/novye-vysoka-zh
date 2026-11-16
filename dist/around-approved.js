@@ -4,17 +4,17 @@
 
   const groups = {
     life: [
-      { title: 'Магазины', image: 'shop-pyaterochka-client.webp', position: 'center 90%', alt: 'Магазин «Пятёрочка». Реальная фотография клиента с ретушью тени столба на асфальте.' },
-      { title: 'Остановки транспорта', image: 'stop-degtyaritsy.png' },
-      { title: 'Образовательные учреждения', image: 'school-green-v2.webp', alt: 'Художественно обработанное фото образовательного учреждения среди зелени' },
-      { title: 'Дороги и подъезды', image: 'road-pines-client-v2.webp', position: 'center 65%', alt: 'Реальная дорога через сосновый лес на фотографии клиента.' }
+      { title: '商店', image: 'shop-pyaterochka-client.webp', position: 'center 90%', alt: 'Pyaterochka 超市。客户实拍，已修除路面上的电线杆阴影。' },
+      { title: '公交站点', image: 'stop-degtyaritsy.png' },
+      { title: '教育机构', image: 'school-green-v2.webp', alt: '绿树环绕的教育机构，经艺术处理的照片' },
+      { title: '道路与入口', image: 'road-pines-client-v2.webp', position: 'center 65%', alt: '客户实拍的松林道路。' }
     ],
     rest: [
-      { title: 'Высоковский бор', image: 'forest-client-natural.webp', position: 'center 75%', alt: 'Высоковский бор и вода между соснами. Фотография клиента с лёгкой цветокоррекцией.' },
-      { title: 'Причал', image: 'river-edited.webp' },
-      { title: 'Пляж на Волге', image: 'shore-client-natural.webp', position: 'center 78%', alt: 'Песчаный берег Волги у соснового леса. Фотография клиента с лёгкой цветокоррекцией.' },
-      { title: 'Рыбинск', image: 'rybinsk-sunset-v2.webp', alt: 'Художественно обработанное фото Рыбинска на закате' },
-      { title: 'Детский лагерь «Высоковский бор»', image: 'camp-edited.webp' }
+      { title: '维索科沃松林', image: 'forest-client-natural.webp', position: 'center 75%', alt: '维索科沃松林及松树间的水面。客户照片，经过轻微调色。' },
+      { title: '码头', image: 'river-edited.webp' },
+      { title: '伏尔加河沙滩', image: 'shore-client-natural.webp', position: 'center 78%', alt: '松林旁的伏尔加河沙岸。客户照片，经过轻微调色。' },
+      { title: '雷宾斯克', image: 'rybinsk-sunset-v2.webp', alt: '雷宾斯克日落，经艺术处理的照片' },
+      { title: '“维索科沃松林”儿童营地', image: 'camp-edited.webp' }
     ]
   };
   const tabs = [...root.querySelectorAll('[data-around-category]')];

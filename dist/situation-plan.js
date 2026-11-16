@@ -1,5 +1,5 @@
 (() => {
-  const link = document.querySelector('.hero-actions [href="assets/situation-plan-client.png"]');
+  const link = document.querySelector('.hero-actions [href="assets/situation-plan-zh.svg"]');
   const dialog = document.querySelector('#situation-plan-dialog');
   if (!link || !dialog) return;
   link.addEventListener('click', event => {

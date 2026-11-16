@@ -1,4 +1,4 @@
-<svg width="597" height="168" viewBox="0 0 597 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="597" height="168" viewBox="0 0 597 168"><g font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif"><defs><clipPath id="brand-mark"><rect width="175" height="168"/></clipPath></defs><g clip-path="url(#brand-mark)">
 <g clip-path="url(#clip0_3749_424)">
 <path d="M101.56 46.88C104.27 55.39 109.36 61.07 117.12 64.25C131.01 69.93 150.64 66.55 167.62 61.33V55.59C167.61 24.89 142.73 0 112.03 0H111.45C104.05 16.08 97.7895 35.08 101.55 46.88H101.56Z" fill="white"/>
 <path d="M48.8498 143.91C50.9998 131.07 57.9098 120.58 69.3798 112.73C98.4098 92.87 141.5 109.05 166.69 121.84C167.26 118.65 167.61 115.38 167.61 112.03V70.1C156.89 73.21 145.2 75.54 134.26 75.54C126.99 75.54 120.06 74.51 113.94 72.01C103.89 67.9 97.0298 60.3 93.5698 49.43C89.1798 35.67 95.1298 16.16 102.22 0H61.3798C71.9098 23.34 76.0198 56.96 51.3798 98.91C39.7298 118.75 25.4298 133.94 11.2598 145.47C20.2998 157.43 34.0198 165.66 49.7298 167.3C48.1198 159.69 47.5498 151.71 48.8498 143.91Z" fill="white"/>
@@ -22,4 +22,4 @@
 <rect width="596.32" height="167.61" fill="white"/>
 </clipPath>
 </defs>
-</svg>
+</g><text x="205" y="116" font-size="87" fill="white" font-weight="600" textLength="388" lengthAdjust="spacingAndGlyphs">土地商店</text></g></svg>

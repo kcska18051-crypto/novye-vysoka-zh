@@ -6,10 +6,10 @@
  let scale=1,x=0,y=0,baseW=0,baseH=0,gesture=null,timer;
  const pointers=new Map();let pressedRegion=null,startPoint=null,moved=false;
  const popup=$('#qe-quarter-popup');let popupRegion=null,closeTimer,pinned=false,ignoreOpeningClick=false;
- const names={degtyaritsy:'Дегтярицы',nikolo:'Николо-Корма',vysoka:'Новые Высока',chernaya:'Чёрная речка'};
+ const names={degtyaritsy:'杰格佳里齐',nikolo:'尼科洛科尔马',vysoka:'新维索卡',chernaya:'黑河'};
  function hidePopup(){pinned=false;clearTimeout(closeTimer);popup.hidden=true;popupRegion?.classList.remove('is-active');popupRegion=null}
  function placePopup(){if(!popupRegion||popup.hidden)return;const b=popupRegion.querySelector('path').getBoundingClientRect(),shell=$('.qe-map-shell').getBoundingClientRect();const left=Math.max(12,Math.min(shell.width-popup.offsetWidth-12,b.x+b.width/2-shell.x-popup.offsetWidth/2));let top=b.bottom-shell.y+10;if(top+popup.offsetHeight>viewport.clientHeight-10)top=Math.max(10,b.top-shell.y-popup.offsetHeight-10);popup.style.left=left+'px';popup.style.top=top+'px'}
- function showPopup(region,pin=false){pinned=pin;if(pin)ignoreOpeningClick=true;clearTimeout(closeTimer);popupRegion?.classList.remove('is-active');popupRegion=region;region.classList.add('is-active');const id=region.dataset.mapQuarter;$('#qe-popup-name').textContent=names[id];$('#qe-open-selected').dataset.quarter=id;const price={degtyaritsy:'от 70 000 ₽/сотка',nikolo:'от 45 000 ₽/сотка',vysoka:'от 70 000 ₽/сотка',chernaya:'от 100 000 ₽/сотка'}[id];$('#qe-popup-price').hidden=!price;$('#qe-popup-price').textContent=price||'';popup.hidden=false;placePopup()}
+ function showPopup(region,pin=false){pinned=pin;if(pin)ignoreOpeningClick=true;clearTimeout(closeTimer);popupRegion?.classList.remove('is-active');popupRegion=region;region.classList.add('is-active');const id=region.dataset.mapQuarter;$('#qe-popup-name').textContent=names[id];$('#qe-open-selected').dataset.quarter=id;const price={degtyaritsy:'70 000 卢布起/100平方米',nikolo:'45 000 卢布起/100平方米',vysoka:'70 000 卢布起/100平方米',chernaya:'100 000 卢布起/100平方米'}[id];$('#qe-popup-price').hidden=!price;$('#qe-popup-price').textContent=price||'';popup.hidden=false;placePopup()}
  function scheduleClose(){if(pinned)return;clearTimeout(closeTimer);closeTimer=setTimeout(()=>{if(!popup.matches(':hover')&&!popup.contains(document.activeElement)&&!popupRegion?.matches(':hover'))hidePopup()},220)}
  popup.addEventListener('pointerenter',()=>clearTimeout(closeTimer));popup.addEventListener('pointerleave',scheduleClose);popup.addEventListener('focusout',scheduleClose);$('.qe-popup-close').addEventListener('click',()=>{const region=popupRegion;hidePopup();viewport.focus({preventScroll:true})});
  root.querySelectorAll('[data-map-quarter]').forEach(region=>{region.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse'&&!pointers.size)showPopup(region)});region.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')scheduleClose()});region.addEventListener('focus',()=>showPopup(region));region.addEventListener('blur',scheduleClose)});
@@ -24,7 +24,7 @@
   scene.style.width=`${baseW}px`;scene.style.height=`${baseH}px`;
   scene.style.transform=`translate(${-baseW*scale/2+x}px,${-baseH*scale/2+y}px) scale(${scale})`;
   viewport.classList.toggle('is-zoomed',scale>1);
-  $('#qe-map-reset').textContent='Весь генплан';$('#qe-map-reset').setAttribute('aria-label',`Весь генплан. Текущий масштаб ${Math.round(scale*100)} процентов`);$('#qe-map-minus').disabled=scale<=1;$('#qe-map-plus').disabled=scale>=5;
+  $('#qe-map-reset').textContent='完整总平面图';$('#qe-map-reset').setAttribute('aria-label',`完整总平面图。当前缩放比例 ${Math.round(scale*100)} 百分比`);$('#qe-map-minus').disabled=scale<=1;$('#qe-map-plus').disabled=scale>=5;
  }
  function stop(){clearTimeout(timer);scene.classList.remove('is-focusing')}
  function animate(){scene.classList.add('is-focusing');clearTimeout(timer);timer=setTimeout(()=>scene.classList.remove('is-focusing'),450)}

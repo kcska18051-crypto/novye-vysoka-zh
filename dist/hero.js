@@ -8,8 +8,8 @@
   let resumeOnVisible = false;
   const staticOnly = () => motion.matches || Boolean(connection?.saveData) || ['slow-2g','2g'].includes(connection?.effectiveType);
   function label() {
-    toggle.textContent = video.paused ? 'Включить видео ▷' : 'Пауза Ⅱ';
-    toggle.setAttribute('aria-label',video.paused ? 'Включить фоновое видео' : 'Приостановить фоновое видео');
+    toggle.textContent = video.paused ? '播放视频 ▷' : '暂停 Ⅱ';
+    toggle.setAttribute('aria-label',video.paused ? '播放背景视频' : '暂停背景视频');
   }
   function stopForPreference() {
     if (!staticOnly()) return;

@@ -2,18 +2,19 @@
  const root=document.querySelector('.transport-section');if(!root)return;
  const data=window.TRIP_PLANNER_DATA,state={city:'moscow',mode:'bus'};
  const panel=root.querySelector('.transport-result'),list=root.querySelector('[data-route-steps]');
+ const routeQueries={"moscow": "\u041c\u043e\u0441\u043a\u0432\u0430, \u0420\u043e\u0441\u0441\u0438\u044f~\u0414\u0435\u0433\u0442\u044f\u0440\u0438\u0446\u044b, \u0420\u044b\u0431\u0438\u043d\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d, \u042f\u0440\u043e\u0441\u043b\u0430\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c, \u0420\u043e\u0441\u0441\u0438\u044f", "yaroslavl": "\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u043b\u044c, \u0420\u043e\u0441\u0441\u0438\u044f~\u0414\u0435\u0433\u0442\u044f\u0440\u0438\u0446\u044b, \u0420\u044b\u0431\u0438\u043d\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d, \u042f\u0440\u043e\u0441\u043b\u0430\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c, \u0420\u043e\u0441\u0441\u0438\u044f", "rybinsk": "\u0420\u044b\u0431\u0438\u043d\u0441\u043a, \u0420\u043e\u0441\u0441\u0438\u044f~\u0414\u0435\u0433\u0442\u044f\u0440\u0438\u0446\u044b, \u0420\u044b\u0431\u0438\u043d\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d, \u042f\u0440\u043e\u0441\u043b\u0430\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c, \u0420\u043e\u0441\u0441\u0438\u044f", "uglich": "\u0423\u0433\u043b\u0438\u0447, \u0420\u043e\u0441\u0441\u0438\u044f~\u0414\u0435\u0433\u0442\u044f\u0440\u0438\u0446\u044b, \u0420\u044b\u0431\u0438\u043d\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d, \u042f\u0440\u043e\u0441\u043b\u0430\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c, \u0420\u043e\u0441\u0441\u0438\u044f"};
  const reduced=matchMedia('(prefers-reduced-motion:reduce)');let animations=[];
  function render(animate=true){
   animations.forEach(a=>a.cancel());animations=[];const oldHeight=panel.getBoundingClientRect().height;
   root.querySelectorAll('[data-route-options]').forEach(group=>group.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(state[group.dataset.routeOptions]===b.dataset.value))));
   const route=data.routes[state.city+':'+state.mode];
-  root.querySelector('[data-route-heading]').textContent=data.cities[state.city]+' → Новые Высока';
+  root.querySelector('[data-route-heading]').textContent=data.cities[state.city]+' → 新维索卡';
   list.replaceChildren();
   route.steps.forEach(step=>{const li=document.createElement('li'),title=document.createElement('strong'),p=document.createElement('p');title.textContent=step.title;p.textContent=step.text;li.append(title,p);if(step.time){const time=document.createElement('span');time.className='trip-time';time.textContent=step.time;li.append(time)}list.append(li)});
-  const total=root.querySelector('[data-route-total]');total.hidden=!Number.isFinite(route.totalMinutes);total.textContent=total.hidden?'':'Общее время: '+route.totalMinutes+' мин';
+  const total=root.querySelector('[data-route-total]');total.hidden=!Number.isFinite(route.totalMinutes);total.textContent=total.hidden?'':'总时间： '+route.totalMinutes+' 分钟';
   root.querySelector('[data-travel-note]').textContent=route.note;root.querySelector('[data-travel-note]').hidden=!route.note;
   const alt=root.querySelector('[data-route-alternative]');alt.hidden=!route.alternative;
-  const link=root.querySelector('[data-route-link]');link.href='https://yandex.ru/maps/?'+new URLSearchParams({rtext:data.cities[state.city]+', Россия~'+data.destination.address,rtt:state.mode==='car'?'auto':'mt'});
+  const link=root.querySelector('[data-route-link]');link.href='https://yandex.ru/maps/?'+new URLSearchParams({rtext:routeQueries[state.city],rtt:state.mode==='car'?'auto':'mt'});
   if(animate&&!reduced.matches){const newHeight=panel.getBoundingClientRect().height;animations.push(panel.animate([{height:oldHeight+'px'},{height:newHeight+'px'}],{duration:280,easing:'ease-out'}));[...list.children].forEach((li,i)=>animations.push(li.animate([{opacity:0,transform:'translateY(5px)'},{opacity:1,transform:'translateY(0)'}],{duration:240,delay:i*25,easing:'ease-out',fill:'backwards'})));}
  }
  const icons={car:'M5 16H3V10l2-5h14l2 5v6h-2M5 16h14M5 10h14M6 16v3M18 16v3M6 13h1M17 13h1',bus:'M5 17V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v12H5Zm0-7h14M8 3v7M5 17v3M19 17v3M8 14h1M15 14h1',train:'M6 16V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v11l-3 3H9l-3-3Zm0-7h12M9 13h.01M15 13h.01M9 19l-3 3M15 19l3 3'};

@@ -249,7 +249,7 @@
     if (!sources[videoProvider] && videoProvider !== 'local') return;
     videoReturnFocus = button;
     if (forestAudio && !forestAudio.paused) forestAudio.pause();
-    if (videoTitle) videoTitle.textContent = title || 'Видео о проекте';
+    if (videoTitle) videoTitle.textContent = title || '项目视频';
     videoDialog.dataset.format = button.classList.contains('reel-card') ? 'vertical' : 'horizontal';
     if (videoProvider === 'local') {
       const video = document.createElement('video');
@@ -260,7 +260,7 @@
       video.defaultMuted = video.muted;
       video.preload = 'metadata';
       video.poster = button.querySelector('img')?.src || '';
-      video.setAttribute('aria-label', title || 'Видео о проекте');
+      video.setAttribute('aria-label', title || '项目视频');
       videoFrame.replaceChildren(video);
       if (button.dataset.videoDescription) {
         const description = document.createElement('p');
@@ -274,7 +274,7 @@
     }
     const iframe = document.createElement('iframe');
     iframe.src = sources[videoProvider];
-    iframe.title = title || 'Видео о проекте';
+    iframe.title = title || '项目视频';
     iframe.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
     iframe.allowFullscreen = true;
     iframe.referrerPolicy = 'strict-origin-when-cross-origin';
@@ -299,10 +299,10 @@
   const leadClose = leadDialog?.querySelector('.lead-dialog-close');
   let leadReturnFocus = null;
   const leadContent = {
-    selection: { title: 'Подобрать участок', submit: 'Получить подборку' },
-    tour: { title: 'Записаться на экскурсию', submit: 'Записаться на экскурсию' },
-    installment: { title: 'Участок в рассрочку', submit: 'Получить консультацию' },
-    promotion: { title: 'Участвовать в акции', submit: 'Оставить заявку' }
+    selection: { title: '为您选地', submit: '获取地块推荐' },
+    tour: { title: '预约实地参观', submit: '预约实地参观' },
+    installment: { title: '分期购地', submit: '获取咨询' },
+    promotion: { title: '参加优惠活动', submit: '提交申请' }
   };
   const setLeadIntent = (intent) => {
     const selectedIntent = leadContent[intent] ? intent : 'selection';
@@ -314,10 +314,10 @@
     if (intents) intents.hidden = selectedIntent === 'promotion' || selectedIntent === 'installment';
     const intro = leadDialog?.querySelector('.lead-dialog-intro p');
     if (intro) intro.textContent = selectedIntent === 'installment'
-      ? 'Оставьте телефон — поможем подобрать участок и расскажем об условиях покупки'
+      ? '留下电话，我们将帮您挑选地块并介绍购买条件'
       : selectedIntent === 'promotion'
-      ? 'Оставьте контакты — команда свяжется с вами и расскажет об участии в акции.'
-      : 'Оставьте контакты — команда уточнит ваши планы и предложит подходящий следующий шаг.';
+      ? '留下联系方式，团队将联系您并介绍活动参与方式。'
+      : '留下联系方式，团队将了解您的计划并建议合适的下一步。';
   };
   const closeLead = () => {
     if (leadDialog?.open) leadDialog.close();
@@ -364,13 +364,13 @@
       button.setAttribute('aria-pressed', String(playing));
       button.classList.toggle('is-playing', playing);
       button.setAttribute('aria-label', button === soundButton
-        ? `Послушать лес — ${playing ? 'выключить' : 'включить'} звуки леса`
-        : `Звук — ${playing ? 'выключить' : 'включить'} звуки леса`);
+        ? `聆听森林 — ${playing ? '关闭' : '开启'} 森林之声`
+        : `声音 — ${playing ? '关闭' : '开启'} 森林之声`);
     });
     const strong = soundButton?.querySelector('strong');
-    if (strong) strong.textContent = 'Послушать лес';
+    if (strong) strong.textContent = '聆听森林';
     const floatingLabel = floatingBirdButton?.querySelector('.sound-floating-label');
-    if (floatingLabel) floatingLabel.textContent = playing ? 'Звук включён' : 'Звук';
+    if (floatingLabel) floatingLabel.textContent = playing ? '声音已开启' : '声音';
 
   };
   const toggleForestSound = async () => {
@@ -386,7 +386,7 @@
       setSoundState(true);
     } catch {
       setSoundState(false);
-      if (soundStatus) soundStatus.textContent = 'Не удалось включить звук — проверьте настройки браузера';
+      if (soundStatus) soundStatus.textContent = '无法播放声音，请检查浏览器设置';
     }
   };
   soundButton?.addEventListener('click', toggleForestSound);
@@ -408,7 +408,7 @@
   forestAudio?.addEventListener('pause', () => setSoundState(false));
   forestAudio?.addEventListener('error', () => {
     setSoundState(false);
-    if (soundStatus) soundStatus.textContent = 'Аудиофайл временно недоступен';
+    if (soundStatus) soundStatus.textContent = '音频文件暂时无法使用';
   });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden && forestAudio && !forestAudio.paused) forestAudio.pause();
@@ -439,9 +439,9 @@
     success.setAttribute('role', 'status');
     const successTitle = document.createElement('h3');
     successTitle.tabIndex = -1;
-    successTitle.textContent = 'Спасибо! Ваша заявка принята';
+    successTitle.textContent = '谢谢！我们已收到您的申请';
     const successText = document.createElement('p');
-    successText.textContent = 'В ближайшее время с вами свяжется менеджер.';
+    successText.textContent = '顾问将尽快与您联系。';
     success.append(successTitle, successText);
     demoForm.append(success);
     // Backend integration: dispatch only after the server confirms receipt.
@@ -467,15 +467,15 @@
       if (demoForm.classList.contains('is-loading') || demoForm.classList.contains('is-submitted')) return;
       const phoneDigits = phone?.value.replace(/\D/g, '') || '';
       if (phone && phoneDigits.length !== 11) {
-        phone.setCustomValidity('Введите телефон полностью');
+        phone.setCustomValidity('请输入完整电话号码');
         phone.setAttribute('aria-invalid', 'true');
-        if (error) error.textContent = 'Введите телефон полностью';
+        if (error) error.textContent = '请输入完整电话号码';
       }
       const invalid = demoForm.querySelector(':invalid');
       if (invalid) {
         demoForm.classList.add('is-error');
         demoForm.classList.remove('is-success', 'is-loading');
-        if (status) status.textContent = 'Проверьте отмеченные поля';
+        if (status) status.textContent = '请检查标出的字段';
         invalid.focus({ preventScroll: true });
         invalid.reportValidity?.();
         return;
@@ -486,7 +486,7 @@
         submit.disabled = true;
         submit.setAttribute('aria-busy', 'true');
       }
-      if (status) status.textContent = 'Проверяем данные…';
+      if (status) status.textContent = '正在检查信息…';
       setTimeout(() => {
         if (demoForm.classList.contains('is-submitted')) return;
         demoForm.classList.remove('is-loading');
@@ -494,7 +494,7 @@
           submit.disabled = false;
           submit.removeAttribute('aria-busy');
         }
-        if (status) status.textContent = 'Форма заполнена. Отправка будет подключена перед запуском сайта.';
+        if (status) status.textContent = '表单已填写。网站正式上线前将接入提交功能。';
       }, reduceMotion.matches ? 0 : 450);
     });
   });
@@ -503,7 +503,7 @@
   const tourSubmit = tourForm?.querySelector('[data-tour-submit]');
   const syncTourSubmit = () => {
     const intent = tourForm?.querySelector('input[name="intent"]:checked')?.value;
-    if (tourSubmit) tourSubmit.textContent = intent === 'video' ? 'Получить видео участка' : 'Записаться на экскурсию';
+    if (tourSubmit) tourSubmit.textContent = intent === 'video' ? '获取地块视频' : '预约实地参观';
   };
   tourForm?.querySelectorAll('input[name="intent"]').forEach((option) => option.addEventListener('change', syncTourSubmit));
   syncTourSubmit();
@@ -513,13 +513,13 @@
   const closeMenu = () => {
     if (!menuButton || !mobileMenu) return;
     menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.querySelector('[data-menu-label]').textContent = 'Меню';
+    menuButton.querySelector('[data-menu-label]').textContent = '菜单';
     mobileMenu.hidden = true;
   };
   menuButton?.addEventListener('click', () => {
     const open = menuButton.getAttribute('aria-expanded') === 'true';
     menuButton.setAttribute('aria-expanded', String(!open));
-    menuButton.querySelector('[data-menu-label]').textContent = open ? 'Меню' : 'Закрыть';
+    menuButton.querySelector('[data-menu-label]').textContent = open ? '菜单' : '关闭';
     if (mobileMenu) mobileMenu.hidden = open;
   });
   mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
