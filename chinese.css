@@ -1,0 +1,12 @@
+/* Chinese typography; preserve the approved visual design and responsive structure. */
+:root{--sans:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;--serif:"Songti SC","STSong","SimSun","Noto Serif CJK SC",serif}
+html[lang=zh-CN] body{line-height:1.7;line-break:strict;word-break:normal;overflow-wrap:anywhere}
+html[lang=zh-CN] :is(h1,h2,h3,h4,h5,h6){letter-spacing:0;line-height:1.28;font-weight:400}
+html[lang=zh-CN] button,html[lang=zh-CN] input,html[lang=zh-CN] select{font-family:var(--sans)}
+html[lang=zh-CN] .hero-preview h1{line-height:1.22;letter-spacing:.01em;max-width:680px}
+html[lang=zh-CN] .hero-preview .hero-price{font-size:clamp(23px,2.4vw,34px);white-space:normal}
+html[lang=zh-CN] .brand-project{letter-spacing:.04em}
+html[lang=zh-CN] .map-card-media.is-fallback::after{content:"照片即将添加"}
+html[lang=zh-CN] .button{line-height:1.5}
+html[lang=zh-CN] :is(.transport-step,.trip-step,.qe-info){overflow-wrap:anywhere}
+@media(max-width:760px){html[lang=zh-CN] .hero-preview h1{font-size:clamp(29px,8vw,40px);max-width:100%;line-height:1.25}html[lang=zh-CN] .hero-preview .hero-lead{line-height:1.7}html[lang=zh-CN] .hero-preview .hero-price{font-size:23px}}
