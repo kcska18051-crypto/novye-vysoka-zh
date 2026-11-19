@@ -26,7 +26,7 @@
     if(busy)return;busy=true;activeTrigger=trigger;
     const id=trigger.dataset.quarter,name=quarters[id];
     $('#qe-detail-title').textContent=name;
-    plan.loading='eager';plan.src=id==='chernaya'?'assets/quarter-overview/chernaya-plan-20261028.jpg':(['degtyaritsy','nikolo'].includes(id)?`assets/quarter-overview/${id}-plan-zh.svg`:`assets/quarter-overview/${id}-plan.png`);plan.alt=`片区原始总平面图 «${name}»`;
+    plan.loading='eager';plan.src=id==='chernaya'?'assets/quarter-overview/chernaya-plan-20261028.jpg':(['degtyaritsy','nikolo'].includes(id)?`assets/quarter-overview/${id}-plan-zh.svg?v=sotka-20261119`:`assets/quarter-overview/${id}-plan.png`);plan.alt=`片区原始总平面图 «${name}»`;
     viewer.setAttribute('aria-label',`片区总平面图 «${name}»。缩放：加号和减号。移动：方向键或拖动。`);
     const price=priceData[id];$('.qe-price').hidden=!price;
     if(price)$('.qe-price').innerHTML=`${price.toLocaleString('zh-CN')} 卢布起<span>每1索特卡</span>`;
@@ -34,7 +34,7 @@
     if(price)$('.qe-key p').lastChild.textContent=`${price.toLocaleString('zh-CN')} 卢布起/索特卡`;
     $('.qe-key p:last-child').hidden=id!=='degtyaritsy';
     $('[data-plan-quarter]').dataset.planQuarter=name;
-    $('#qe-pdf').href=`assets/quarter-overview/${id}-plan.pdf`;$('#qe-pdf').download=`${name} — 总平面图.pdf`;
+    $('#qe-pdf').href=`assets/quarter-overview/${id}-plan.pdf?v=sotka-20261119`;$('#qe-pdf').download=`${name} — 总平面图.pdf`;
     detail.hidden=false;detail.showModal();
     document.body.style.overflow='hidden';
     scale=1;x=y=0;paint();
