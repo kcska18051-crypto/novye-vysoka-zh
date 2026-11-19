@@ -9,7 +9,7 @@ const script = fs.readFileSync(path.join(root, 'dist', 'app.js'), 'utf8');
 const css = fs.readFileSync(path.join(root, 'dist', 'styles.css'), 'utf8');
 
 test('header identifies Novye Vysoka as a Magazin Zemli project', () => {
-  assert.match(html, /class="brand-project"[^>]*>\s*新维索卡项目\s*</i);
+  assert.match(html, /class="brand-project"[^>]*>\s*“新维索卡”项目\s*</i);
 });
 
 test('hero offers land selection and an accessible location preview', () => {
@@ -36,9 +36,9 @@ test('redundant section overlines are removed', () => {
 });
 
 test('desktop header keeps six key links and a persistent selection action', () => {
-  const nav = html.match(/<nav aria-label="页面导航">([\s\S]*?)<\/nav>/i)?.[1] || '';
+  const nav = html.match(/<nav aria-label="页面各部分">([\s\S]*?)<\/nav>/i)?.[1] || '';
   assert.equal((nav.match(/<a /g) || []).length, 6);
-  for (const label of ['项目介绍', '乡居生活', '交通路线', '地块', '购地条件', '团队介绍']) assert.match(nav, new RegExp(label));
+  for (const label of ['关于项目', '城外生活', '如何到达', '地块', '购买条件', '关于团队']) assert.match(nav, new RegExp(label));
   assert.match(html, /class="header-cta"[^>]+data-lead-intent="selection"/);
 });
 
@@ -51,26 +51,26 @@ test('faq starts closed and both accordions expose controlled state', () => {
 });
 
 test('lead choices are visible selectable cards and footer includes legal navigation', () => {
-  assert.match(html, /实地参观/);
+  assert.match(html, /前来查看/);
   assert.match(html, /获取地块视频/);
   assert.match(html, /class="footer-legal"/);
   assert.match(html, /landmarket\.biz\/privacy/);
 });
 
 test('final form names the result of the selected action', () => {
-  assert.match(html, /data-tour-submit[^>]*>预约看地/);
+  assert.match(html, /data-tour-submit[^>]*>预约参观/);
   assert.match(script, /syncTourSubmit/);
   assert.match(script, /获取地块视频/);
 });
 
 test('company reasons address five distinct buyer concerns', () => {
-  for (const reason of ['法律信息透明', '直接购买', '熟悉当地', '全程交易协助', '业主提供分期付款']) {
+  for (const reason of ['法律透明', '直接购买', '了解区域', '交易协助', '业主提供分期付款']) {
     assert.match(html, new RegExp(reason));
   }
 });
 
 test('faq covers ownership, access, viewing, and purchase terms in concise answers', () => {
-  for (const question of ['地块由谁出售？', '地块的进出道路情况如何？', '可以实地看地吗？', '分期付款如何安排？']) {
+  for (const question of ['谁出售地块？', '地块的进出道路如何安排？', '可以前来查看地块吗？', '如何提供分期付款？']) {
     assert.match(html, new RegExp(question.replace(/[?]/g, '\\?')));
   }
   const faq = html.match(/<div class="faq-list reveal"[\s\S]*?<\/div>\s*<\/section>/)?.[0] || '';

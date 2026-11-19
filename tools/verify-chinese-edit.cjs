@@ -7,7 +7,7 @@ fs.mkdirSync(out, {recursive:true});
 (async () => {
   const browser = await chromium.launch({headless:true});
   try {
-    for (const width of [320,390,1440]) {
+    for (const width of (process.env.CHECK_WIDTHS || '320,390,1440').split(',').map(Number)) {
       const context = await browser.newContext({viewport:{width,height:900},locale:'zh-CN',reducedMotion:'reduce'});
       const page = await context.newPage(), errors=[], posts=[];
       page.on('pageerror', e => errors.push(e.message));
@@ -15,13 +15,16 @@ fs.mkdirSync(out, {recursive:true});
       if(!process.env.CHECK_LIVE) await page.route(base+'**', async route => {
         const relative = new URL(route.request().url()).pathname.slice(new URL(base).pathname.length)||'index.html';
         const file = path.join(root,relative);
-        if(/\.(js|css)$/.test(relative)||relative==='index.html') return route.fulfill({path:file});
+        if(fs.existsSync(file) && fs.statSync(file).isFile()) return route.fulfill({path:file});
         return route.continue();
       });
       const response = await page.goto(base,{waitUntil:'networkidle'});assert.equal(response.status(),200);
       console.log(`Loaded ${width}`);
       const scan = async () => {const size=await page.evaluate(()=>({w:innerWidth,s:document.documentElement.scrollWidth}));assert.ok(size.s<=size.w+1,JSON.stringify(size))};
       await scan();
+      await page.locator('.hero-actions [aria-controls="situation-plan-dialog"]').click();
+      await page.locator('#situation-plan-dialog img').evaluate(i=>i.decode());
+      await scan();await page.keyboard.press('Escape');
       for(const city of ['moscow','yaroslavl','rybinsk','uglich']) {
         await page.locator(`[data-route-options="city"] [data-value="${city}"]`).click();
         for(const mode of ['car','bus','train']) {await page.locator(`[data-route-options="mode"] [data-value="${mode}"]`).click();await scan();}
@@ -53,6 +56,7 @@ fs.mkdirSync(out, {recursive:true});
       }
       await page.locator('.cinema-card').first().click();assert.equal(await page.locator('#video-dialog').evaluate(d=>d.open),true);await page.locator('.video-dialog-close').click();
       await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:path.join(out,width+'-hero.png')});
+      await page.screenshot({path:path.join(out,width+'-full.png'),fullPage:true});
       assert.deepEqual(errors,[]);assert.deepEqual(posts,[]);
       console.log(`PASS ${width}: HTTP, 12 routes, 9 scenes, 4 plans, both international forms, validation, video, layout, no JS errors or submissions`);
       await context.close();

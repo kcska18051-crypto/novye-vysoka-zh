@@ -4,10 +4,10 @@
 
   const groups = {
     life: [
-      { title: '商店', image: 'shop-pyaterochka-client.webp', position: 'center 90%', alt: 'Pyaterochka 超市。客户实拍，已修除路面上的电线杆阴影。' },
-      { title: '公交站点', image: 'stop-degtyaritsy.png' },
+      { title: '商店', image: 'shop-pyaterochka-client.webp', position: 'center 90%', alt: '“Pyaterochka”商店。客户实拍照片，已修整沥青路面上的电线杆阴影。' },
+      { title: '交通站点', image: 'stop-degtyaritsy.png' },
       { title: '教育机构', image: 'school-green-v2.webp', alt: '绿树环绕的教育机构，经艺术处理的照片' },
-      { title: '道路与入口', image: 'road-pines-client-v2.webp', position: 'center 65%', alt: '客户实拍的松林道路。' }
+      { title: '道路与通道', image: 'road-pines-client-v2.webp', position: 'center 65%', alt: '客户实拍的松林道路。' }
     ],
     rest: [
       { title: '维索科沃松林', image: 'forest-client-natural.webp', position: 'center 75%', alt: '维索科沃松林及松树间的水面。客户照片，经过轻微调色。' },

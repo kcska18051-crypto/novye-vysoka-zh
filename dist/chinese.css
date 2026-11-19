@@ -6,7 +6,7 @@ html[lang=zh-CN] button,html[lang=zh-CN] input,html[lang=zh-CN] select{font-fami
 html[lang=zh-CN] .hero-preview h1{line-height:1.22;letter-spacing:.01em;max-width:680px}
 html[lang=zh-CN] .hero-preview .hero-price{font-size:clamp(23px,2.4vw,34px);white-space:normal}
 html[lang=zh-CN] .brand-project{letter-spacing:.04em}
-html[lang=zh-CN] .map-card-media.is-fallback::after{content:"照片即将添加"}
+html[lang=zh-CN] .map-card-media.is-fallback::after{content:"将添加照片"}
 html[lang=zh-CN] .button{line-height:1.5}
 html[lang=zh-CN] :is(.transport-step,.trip-step,.qe-info){overflow-wrap:anywhere}
 @media(max-width:760px){html[lang=zh-CN] .hero-preview h1{font-size:clamp(29px,8vw,40px);max-width:100%;line-height:1.25}html[lang=zh-CN] .hero-preview .hero-lead{line-height:1.7}html[lang=zh-CN] .hero-preview .hero-price{font-size:23px}}

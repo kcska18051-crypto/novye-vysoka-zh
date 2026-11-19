@@ -1,10 +1,12 @@
 const fs=require('fs');
+const cp=require('child_process');
 const root='dist/';
-const original=p=>require('child_process').execFileSync('git',['show','c2516d7:dist/'+p],{maxBuffer:20*1024*1024}).toString('utf8');
+const sourceBuffer=p=>{const archive='source-assets/original-russian-artwork/'+p.split('/').pop();return fs.existsSync(archive)?fs.readFileSync(archive):cp.execFileSync('git',['show','c2516d7:dist/'+p],{maxBuffer:32*1024*1024});};
+const original=p=>sourceBuffer(p).toString('utf8');
 const family='Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif';
 const svg=(w,h,body)=>`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><g font-family="${family}">${body}</g></svg>`;
 const text=(x,y,t,size=22,fill='#172d1b',extra='')=>`<text x="${x}" y="${y}" font-size="${size}" fill="${fill}" ${extra}>${t}</text>`;
-const png=p=>'data:image/png;base64,'+fs.readFileSync(root+p).toString('base64');
+const png=p=>'data:image/png;base64,'+sourceBuffer(p).toString('base64');
 // Keep the original icon and replace the outlined Russian wordmark with Chinese lettering.
 const old=original('magazin-zemli-logo.svg');
 const inner=old.replace(/^[\s\S]*?<svg[^>]*>/,'').replace(/<\/svg>\s*$/,'');
@@ -27,9 +29,9 @@ for(const [id,title,price] of [['degtyaritsy','杰格佳里齐','70,000'],['niko
 let overview=original('assets/quarter-overview/overview-clean.svg');
 const labels=[
  [197,197,52,30,'沙滩',17],[197,316,64,30,'码头',17],
- [933,110,79,28,'餐厅',17],[892,157,120,31,'遛狗区',17],[843,210,169,30,'运动场',17],
- [869,258,144,30,'儿童游乐场',16],[841,298,173,30,'家园森林公园',16],
- [1051,447,139,29,'样板房',17],[1093,497,71,29,'商店',17],[958,602,67,30,'教堂',17],
+ [933,110,79,28,'餐厅',17],[892,157,120,31,'犬类活动场',17],[843,210,169,30,'运动场',17],
+ [869,258,144,30,'儿童游乐场',16],[841,298,173,30,'“家中森林”公园',16],
+ [1051,447,139,29,'展示住宅',17],[1093,497,71,29,'商店',17],[958,602,67,30,'教堂',17],
  [372,25,66,18,'杰格佳里齐',11],[216,370,63,18,'杰格佳里齐',11],[294,536,104,20,'维索科沃松林',11],
  [684,650,56,18,'瓦利佐沃',11],[1102,634,88,19,'尼科洛科尔马',11]
 ];
@@ -41,17 +43,11 @@ patch+=`<path d="M1117 618l83-57v24l-74 49Z" fill="#667054"/>`+text(1136,617,'�
 patch+=`<path d="M895 841l25-87 16 5-25 87Z" fill="#687452"/>`+text(907,832,'乌格利奇 45公里',10,'#fff9e9','transform="rotate(-74 907 832)"');
 patch+='</g>';
 overview=overview.replace(/<\/svg>\s*$/,patch+'</svg>');fs.writeFileSync(root+'assets/quarter-overview/overview-clean.svg',overview);
-// Fully vectorized localization of the regional route diagram, with original destinations/distances and route geometry.
-let body='<rect width="1920" height="1080" fill="#e9dfd0"/><defs><pattern id="contours" width="170" height="150" patternUnits="userSpaceOnUse"><path d="M0 45Q50 10 120 55T230 20M-40 140Q30 70 110 115T220 100" fill="none" stroke="#cabead" stroke-width="2" opacity=".35"/></pattern></defs><rect width="1920" height="1080" fill="url(#contours)"/>';
-body+='<path d="M0 690Q360 650 570 460T1050 230T1920 370M0 290Q380 380 740 530T1300 800T1920 750M150 1080Q440 780 530 0M1450 1080Q1170 630 1380 0" fill="none" stroke="#cfc5b7" stroke-width="3"/>';
-body+='<g fill="none" stroke="#263b2b" stroke-width="3"><path d="M553 997L620 852L665 780L695 735L728 675L771 601L798 531L827 493L848 427L873 390L951 377L981 336L989 330L960 283L912 269L865 257L824 251L806 223L768 217L759 226"/><path d="M689 371L709 333L696 312L716 280L719 259"/><path d="M800 183L761 184"/><path d="M699 146L710 174L694 164"/></g>';
-const city=(cx,cy,name,tx,ty,dist,align='start')=>{
- body+=`<circle cx="${cx}" cy="${cy}" r="${name==='新维索卡'?24:14}" fill="#386d1a" stroke="#d4d9b6" stroke-width="4"/>`;
- body+=text(tx,ty,name,name==='新维索卡'?54:31,name==='新维索卡'?'#386d1a':'#172d1b',`text-anchor="${align}" font-weight="600"`);
- if(dist){body+=`<rect x="${tx}" y="${ty+10}" width="140" height="46" fill="#182d1e" rx="2"/>`+text(tx+12,ty+42,dist+' 公里',27,'white');}
-};
-city(725,224,'新维索卡',685,246,null,'end');city(698,146,'科普里诺',539,96,'30');city(801,183,'雷宾斯克',825,139,'25');city(994,330,'雅罗斯拉夫尔',1020,342,'110');city(689,371,'乌格利奇',563,383,'45');city(553,997,'莫斯科',420,975,null);
-body+='<rect x="742" y="676" width="157" height="48" fill="#182d1e"/>'+text(755,710,'300 公里',28,'white');
-body+=text(1820,980,'项目区位图',48,'#172d1b','text-anchor="end"');
+// Preserve the original basemap and routes; cover only prominent Russian captions.
+let body='<image href="'+png('assets/situation-plan-client.png')+'" width="1920" height="1080"/>';
+const k=1920/1100;
+const captions=[[122,109,273,33,'新维索卡',31,'#386d1a'],[309,41,91,20,'科普里诺',18,'#111'],[470,63,92,20,'雷宾斯克',18,'#111'],[581,177,123,23,'雅罗斯拉夫尔',17,'#111'],[322,203,70,20,'乌格利奇',18,'#111'],[237,542,76,21,'莫斯科',18,'#111'],[725,532,321,32,'区位图',27,'#172d1b']];
+for(const [x,y,w,h,t,size,colour]of captions)body+='<rect x="'+(x*k)+'" y="'+(y*k)+'" width="'+(w*k)+'" height="'+(h*k)+'" fill="#e9dfd0"/>'+text((x+2)*k,(y+h*.82)*k,t,size*k,colour);
+for(const [x,y,w,t]of [[310,62,79,'30 公里'],[472,85,78,'25 公里'],[584,200,78,'110 公里'],[322,224,78,'45 公里'],[424,387,78,'300 公里']])body+='<rect x="'+(x*k)+'" y="'+(y*k)+'" width="'+(w*k)+'" height="'+(28*k)+'" fill="#182d1e"/>'+text((x+6)*k,(y+21)*k,t,18*k,'white');
 fs.writeFileSync(root+'assets/situation-plan-zh.svg',svg(1920,1080,body));
-console.log('Localized SVG assets created.');
+console.log('Chinese artwork created.');
