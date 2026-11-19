@@ -16,7 +16,7 @@ fs.writeFileSync(root+'assets/redstar-agency-credit.svg',svg(179,18,text(0,13,'�
 for(const [id,title,price] of [['degtyaritsy','杰格佳里齐','70,000'],['nikolo','尼科洛科尔马','45,000']]){
  let body=`<image href="${png('assets/quarter-overview/'+id+'-plan.png')}" width="1680" height="1187"/><rect width="700" height="144" fill="white"/>`;
  body+=text(24,49,title,29,'#111');
- body+=`<rect x="22" y="75" width="49" height="22" fill="#ceff96" stroke="#333"/>`+text(82,95,`${price} 卢布起 / 100平方米`,20,'#111');
+ body+=`<rect x="22" y="75" width="49" height="22" fill="#ceff96" stroke="#333"/>`+text(82,95,`${price} 卢布起 / 索特卡`,20,'#111');
  if(id==='degtyaritsy')body+=`<rect x="22" y="115" width="49" height="22" fill="#ffae46" stroke="#333"/>`+text(82,134,'特别价格',20,'#111');
  body+=`<rect x="1620" y="98" width="60" height="26" fill="white"/>`+text(1620,117,'200 米',17,'#111');
  if(id==='nikolo'){

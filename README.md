@@ -23,3 +23,5 @@
 Проверки браузера: `tools/verify-chinese-browser.cjs` (Playwright из среды Codex, переменная CHECK_URL для публичного сайта).
 
 Старые `PROJECT-CONTEXT.md`, документация и `local-preview/` сохранены как история исходной русской разработки; актуальна эта инструкция.
+
+Pricing terminology (19 November 2026): Russian land unit sotka is retained in visible labels (English per sotka, Chinese 每1索特卡). A hover tooltip explains 1 sotka = 100 m². Monetary values and numeric areas are unchanged.

@@ -46,7 +46,7 @@ test('shows qualified house-prize promotion with dates and participation action'
 test('keeps current project features and minimum land price fact-led', () => {
   assert.match(html, /<h2>个人住宅建设用地<\/h2>/);
   assert.match(html, /“新维索卡”位于雷宾斯克区的森林之间/);
-  assert.match(html, /class="hero-price">每100平方米45 000卢布起/);
+  assert.match(html, /class="hero-price"[^>]*>每1索特卡45 000卢布起/);
   assert.match(html, /<h2>直接向业主购买<\/h2>/);
   assert.match(html, /建设的可能性取决于具体地块的规则和限制/);
   assert.doesNotMatch(html, /200多块独立住宅建设用地|275公顷/);

@@ -12,3 +12,5 @@
 - Старый PROJECT-CONTEXT.md и документы до ноября — архив исходной разработки, а не инструкции к публикации русской версии.
 
 - Current user-approved scope (19 November 2026): four neighbourhoods. Change only the project count; the five company reasons and dormant demo datasets remain unchanged.
+
+- User instruction 19 November 2026: retain the Russian unit sotka (Chinese 索特卡) in prices and areas; do not replace it with 100 m² in visible labels. 1 sotka remains 100 m²; no prices or numeric areas are changed.
