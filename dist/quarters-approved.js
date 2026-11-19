@@ -26,8 +26,8 @@
     if(busy)return;busy=true;activeTrigger=trigger;
     const id=trigger.dataset.quarter,name=quarters[id];
     $('#qe-detail-title').textContent=name;
-    plan.loading='eager';plan.src=id==='chernaya'?'assets/quarter-overview/chernaya-plan-20261028.jpg':(['degtyaritsy','nikolo'].includes(id)?`assets/quarter-overview/${id}-plan-zh.svg`:`assets/quarter-overview/${id}-plan.png`);plan.alt=`分区原始总平面图 «${name}»`;
-    viewer.setAttribute('aria-label',`分区总平面图 «${name}»。缩放：加号和减号。移动：方向键或拖动。`);
+    plan.loading='eager';plan.src=id==='chernaya'?'assets/quarter-overview/chernaya-plan-20261028.jpg':(['degtyaritsy','nikolo'].includes(id)?`assets/quarter-overview/${id}-plan-zh.svg`:`assets/quarter-overview/${id}-plan.png`);plan.alt=`片区原始总平面图 «${name}»`;
+    viewer.setAttribute('aria-label',`片区总平面图 «${name}»。缩放：加号和减号。移动：方向键或拖动。`);
     const price=priceData[id];$('.qe-price').hidden=!price;
     if(price)$('.qe-price').innerHTML=`${price.toLocaleString('zh-CN')} 卢布起<span>每100平方米</span>`;
     $('.qe-key').hidden=!['degtyaritsy','nikolo'].includes(id);

@@ -7,7 +7,7 @@ window.TRIP_PLANNER_DATA = {
   },
   "modes": {
     "car": "自驾",
-    "bus": "公交车",
+    "bus": "巴士",
     "train": "火车"
   },
   "destination": {
@@ -29,7 +29,7 @@ window.TRIP_PLANNER_DATA = {
           "text": "到达参考点。链接终点为村庄，并非具体地块。"
         },
         {
-          "title": "杰格佳里齐 → 所选分区",
+          "title": "杰格佳里齐 → 所选片区",
           "text": "出发前我们将发送定位及入口路线图。"
         }
       ],
@@ -47,7 +47,7 @@ window.TRIP_PLANNER_DATA = {
           "text": "到达参考点。链接终点为村庄，并非具体地块。"
         },
         {
-          "title": "杰格佳里齐 → 所选分区",
+          "title": "杰格佳里齐 → 所选片区",
           "text": "出发前我们将发送定位及入口路线图。"
         }
       ],
@@ -65,7 +65,7 @@ window.TRIP_PLANNER_DATA = {
           "text": "到达参考点。链接终点为村庄，并非具体地块。"
         },
         {
-          "title": "杰格佳里齐 → 所选分区",
+          "title": "杰格佳里齐 → 所选片区",
           "text": "出发前我们将发送定位及入口路线图。"
         }
       ],
@@ -83,7 +83,7 @@ window.TRIP_PLANNER_DATA = {
           "text": "到达参考点。链接终点为村庄，并非具体地块。"
         },
         {
-          "title": "杰格佳里齐 → 所选分区",
+          "title": "杰格佳里齐 → 所选片区",
           "text": "出发前我们将发送定位及入口路线图。"
         }
       ],
@@ -94,7 +94,7 @@ window.TRIP_PLANNER_DATA = {
       "steps": [
         {
           "title": "莫斯科 → 雷宾斯克",
-          "text": "从“北门”长途汽车站乘坐直达大巴。",
+          "text": "从“北门”长途汽车站（Severnye Vorota）乘坐直达大巴。",
           "time": "5小时起",
           "source": "https://rasp.yandex.ru/bus/moscow--rybinsk"
         },
@@ -104,7 +104,7 @@ window.TRIP_PLANNER_DATA = {
           "source": "https://rubtrans.ru/?page_id=7266"
         },
         {
-          "title": "杰格佳里齐 → 所选分区",
+          "title": "杰格佳里齐 → 所选片区",
           "text": "出发前我们将发送定位及入口路线图。"
         }
       ],
@@ -125,7 +125,7 @@ window.TRIP_PLANNER_DATA = {
           "source": "https://rubtrans.ru/?page_id=7266"
         },
         {
-          "title": "杰格佳里齐 → 所选分区",
+          "title": "杰格佳里齐 → 所选片区",
           "text": "出发前我们将发送定位及入口路线图。"
         }
       ],
@@ -144,7 +144,7 @@ window.TRIP_PLANNER_DATA = {
           "source": "https://rubtrans.ru/?page_id=7266"
         },
         {
-          "title": "杰格佳里齐 → 所选分区",
+          "title": "杰格佳里齐 → 所选片区",
           "text": "出发前我们将发送定位及入口路线图。"
         }
       ],
@@ -164,7 +164,7 @@ window.TRIP_PLANNER_DATA = {
           "source": "https://rubtrans.ru/?page_id=7266"
         },
         {
-          "title": "杰格佳里齐 → 所选分区",
+          "title": "杰格佳里齐 → 所选片区",
           "text": "出发前我们将发送定位及入口路线图。"
         }
       ],
@@ -174,14 +174,14 @@ window.TRIP_PLANNER_DATA = {
     "moscow:train": {
       "steps": [
         {
-          "title": "莫斯科 → 雷宾斯克客运站",
+          "title": "莫斯科 → 雷宾斯克客运火车站",
           "text": "部分日期有从雅罗斯拉夫尔火车站出发的“燕子”号726Ya次列车。",
           "time": "3小时59分钟",
           "source": "https://rasp.yandex.ru/train/moscow--rybinsk-passazhirskiy"
         },
         {
           "title": "在雷宾斯克换乘",
-          "text": "从雷宾斯克客运站前往长途汽车站，换乘190路公交车。"
+          "text": "从雷宾斯克客运火车站前往长途汽车站，换乘190路公交车。"
         },
         {
           "title": "雷宾斯克 → 杰格佳里齐",
@@ -189,7 +189,7 @@ window.TRIP_PLANNER_DATA = {
           "source": "https://rubtrans.ru/?page_id=7266"
         },
         {
-          "title": "杰格佳里齐 → 所选分区",
+          "title": "杰格佳里齐 → 所选片区",
           "text": "出发前我们将发送定位及入口路线图。"
         }
       ],
@@ -199,14 +199,14 @@ window.TRIP_PLANNER_DATA = {
     "yaroslavl:train": {
       "steps": [
         {
-          "title": "雅罗斯拉夫尔主站 → 雷宾斯克客运站",
+          "title": "雅罗斯拉夫尔主站 → 雷宾斯克客运火车站",
           "text": "乘“海鸥”号6711次快车。请按出行日期选择车次。",
-          "time": "约1小时12–15分钟",
+          "time": "约1小时12分钟至1小时15分钟",
           "source": "https://rasp.yandex.ru/suburban/yaroslavl-glavniy--rybinsk-passazhirskiy"
         },
         {
           "title": "在雷宾斯克换乘",
-          "text": "从雷宾斯克客运站前往长途汽车站，换乘190路公交车。"
+          "text": "从雷宾斯克客运火车站前往长途汽车站，换乘190路公交车。"
         },
         {
           "title": "雷宾斯克 → 杰格佳里齐",
@@ -214,7 +214,7 @@ window.TRIP_PLANNER_DATA = {
           "source": "https://rubtrans.ru/?page_id=7266"
         },
         {
-          "title": "杰格佳里齐 → 所选分区",
+          "title": "杰格佳里齐 → 所选片区",
           "text": "出发前我们将发送定位及入口路线图。"
         }
       ],
@@ -232,7 +232,7 @@ window.TRIP_PLANNER_DATA = {
           "text": "请在上方切换为公交或自驾。"
         },
         {
-          "title": "杰格佳里齐 → 所选分区",
+          "title": "杰格佳里齐 → 所选片区",
           "text": "出发前我们将发送定位及入口路线图。"
         }
       ],
@@ -251,7 +251,7 @@ window.TRIP_PLANNER_DATA = {
           "text": "随后乘190路公交车经尼科洛科尔马至杰格佳里齐。"
         },
         {
-          "title": "杰格佳里齐 → 所选分区",
+          "title": "杰格佳里齐 → 所选片区",
           "text": "出发前我们将发送定位及入口路线图。"
         }
       ],

@@ -19,7 +19,7 @@
 
   const escapeHtml = (value) => String(value || '').replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
   const categoryIcon = { quarters: '⌂', nature: '♧', infrastructure: '◆', transport: '↔' };
-  const categoryName = { quarters: '分区', nature: '自然', infrastructure: '配套设施', transport: '交通' };
+  const categoryName = { quarters: '片区', nature: '自然', infrastructure: '配套设施', transport: '交通' };
 
   function renderFilters() {
     filters.innerHTML = data.categories.map((item) => `<button class="map-filter" type="button" data-map-filter="${item.id}" aria-pressed="${item.id === category}">${escapeHtml(item.label)}</button>`).join('');
@@ -37,7 +37,7 @@
       ['已预订', view.metrics.reserved],
       ['已售', view.metrics.sold]
     ];
-    return `${renderMedia(view)}<button class="map-card-close" type="button" data-map-close aria-label="关闭信息卡">×</button><span class="map-card-type">项目分区</span><h3>${escapeHtml(view.name)}</h3><p class="map-card-description">${escapeHtml(view.description)}</p><div class="map-metrics">${metrics.map(([label,value]) => `<div class="map-metric"><span>${label}</span><strong>${escapeHtml(value)}</strong></div>`).join('')}</div><div class="map-card-actions"><button class="button map-secondary" type="button" data-open-plan>查看总平面图</button><a class="button button-primary" href="#tour" data-lead-intent="selection">为您选地</a></div>`;
+    return `${renderMedia(view)}<button class="map-card-close" type="button" data-map-close aria-label="关闭信息卡">×</button><span class="map-card-type">项目片区</span><h3>${escapeHtml(view.name)}</h3><p class="map-card-description">${escapeHtml(view.description)}</p><div class="map-metrics">${metrics.map(([label,value]) => `<div class="map-metric"><span>${label}</span><strong>${escapeHtml(value)}</strong></div>`).join('')}</div><div class="map-card-actions"><button class="button map-secondary" type="button" data-open-plan>查看总平面图</button><a class="button button-primary" href="#tour" data-lead-intent="selection">为您选地</a></div>`;
   }
 
   function renderObject(view) {
@@ -68,7 +68,7 @@
     list.innerHTML = visible.map((item) => `<button class="map-list-button" type="button" data-map-item="${item.id}" aria-pressed="${item.id === selectedId}">${escapeHtml(item.name)}</button>`).join('');
     root.classList.toggle('has-selection', Boolean(selectedId));
     if (!selectedId) {
-      card.innerHTML = '<div class="map-card-empty"><span>点击标记</span><h3>选择地图上的分区或设施</h3><p>此处将显示总平面图、分区数据或地点简介。</p></div>';
+      card.innerHTML = '<div class="map-card-empty"><span>点击标记</span><h3>选择地图上的片区或设施</h3><p>此处将显示总平面图、片区数据或地点简介。</p></div>';
       return;
     }
     const view = model.getCardModel(model.getItemById(data, selectedId));
@@ -109,7 +109,7 @@
       if (!view || view.kind !== 'quarter' || !dialog) return;
       dialogTitle.textContent = `总平面图： ${view.name}`;
       dialogImage.src = view.image;
-      dialogImage.alt = `分区总平面图 ${view.name}`;
+      dialogImage.alt = `片区总平面图 ${view.name}`;
       dialog.showModal();
     }
   });

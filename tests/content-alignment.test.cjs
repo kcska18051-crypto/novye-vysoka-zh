@@ -44,7 +44,7 @@ test('shows qualified house-prize promotion with dates and participation action'
 });
 
 test('keeps current project features and minimum land price fact-led', () => {
-  assert.match(html, /<h2>独立住宅建设用地<\/h2>/);
+  assert.match(html, /<h2>个人住宅建设用地<\/h2>/);
   assert.match(html, /新维索卡坐落于雷宾斯克区的森林之间/);
   assert.match(html, /class="hero-price">每100平方米45 000卢布起/);
   assert.match(html, /<h2>业主直接出售<\/h2>/);
@@ -69,7 +69,7 @@ test('presents direct purchase with 30 percent down and 12 equal payments', () =
   const purchase = html.match(/<section class="purchase"[\s\S]*?<\/section>/)?.[0] || '';
   assert.match(purchase, /无需银行参与的分期付款/);
   assert.match(purchase, /<dt>首付款<\/dt><dd>30<span>%<\/span><\/dd>/);
-  assert.match(purchase, /<dt>每月等额付款期数<\/dt><dd>12<\/dd>/);
+  assert.match(purchase, /<dt>[^<]*按月等额支付[^<]*<\/dt><dd>12<\/dd>/);
   assert.match(purchase, /data-lead-intent="installment"[^>]*>了解分期条件/);
   assert.match(purchase, /直接向业主购买/);
   assert.match(purchase, /href="#faq"/);

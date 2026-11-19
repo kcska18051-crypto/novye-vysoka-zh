@@ -302,7 +302,7 @@
     selection: { title: '为您选地', submit: '获取地块推荐' },
     tour: { title: '预约实地参观', submit: '预约实地参观' },
     installment: { title: '分期购地', submit: '获取咨询' },
-    promotion: { title: '参加优惠活动', submit: '提交申请' }
+    promotion: { title: '参加抽奖活动', submit: '提交申请' }
   };
   const setLeadIntent = (intent) => {
     const selectedIntent = leadContent[intent] ? intent : 'selection';
@@ -414,19 +414,13 @@
     if (document.hidden && forestAudio && !forestAudio.paused) forestAudio.pause();
   });
 
-  const formatPhone = (value) => {
-    let digits = value.replace(/\D/g, '');
-    if (digits.startsWith('8')) digits = `7${digits.slice(1)}`;
-    if (!digits.startsWith('7')) digits = `7${digits}`;
-    digits = digits.slice(0, 11);
-    const local = digits.slice(1);
-    let result = '+7';
-    if (local.length) result += ` (${local.slice(0, 3)}`;
-    if (local.length >= 3) result += ')';
-    if (local.length > 3) result += ` ${local.slice(3, 6)}`;
-    if (local.length > 6) result += `-${local.slice(6, 8)}`;
-    if (local.length > 8) result += `-${local.slice(8, 10)}`;
-    return result;
+  // Preserve country codes and editing positions; never infer a country.
+  const formatPhone = (value) => value;
+  const isInternationalPhone = (value) => {
+    if (!/^\+[0-9 ()-]+$/.test(value.trim())) return false;
+    const normalized = value.trim().replace(/[ ()-]/g, '');
+    // E.164 shape check, not a guarantee that the number is assigned/reachable.
+    return /^\+[1-9]\d{6,14}$/.test(normalized);
   };
   document.querySelectorAll('[data-demo-form]').forEach((demoForm) => {
     const phone = demoForm.querySelector('input[type="tel"]');
@@ -465,11 +459,10 @@
     demoForm.addEventListener('submit', (event) => {
       event.preventDefault();
       if (demoForm.classList.contains('is-loading') || demoForm.classList.contains('is-submitted')) return;
-      const phoneDigits = phone?.value.replace(/\D/g, '') || '';
-      if (phone && phoneDigits.length !== 11) {
-        phone.setCustomValidity('请输入完整电话号码');
+      if (phone && !isInternationalPhone(phone.value)) {
+        phone.setCustomValidity('请输入含国家区号的电话号码，例如 +86 138 0013 8000');
         phone.setAttribute('aria-invalid', 'true');
-        if (error) error.textContent = '请输入完整电话号码';
+        if (error) error.textContent = '请输入含国家区号的电话号码，例如 +86 138 0013 8000';
       }
       const invalid = demoForm.querySelector(':invalid');
       if (invalid) {
