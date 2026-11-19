@@ -32,7 +32,7 @@
 
   function renderQuarter(view) {
     const metrics = [
-      ['每100平方米价格', view.metrics.pricePerSotka],
+      ['每1索特卡价格', view.metrics.pricePerSotka],
       ['可用', view.metrics.free],
       ['已预订', view.metrics.reserved],
       ['已售', view.metrics.sold]
