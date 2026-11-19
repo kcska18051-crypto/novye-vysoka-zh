@@ -299,10 +299,10 @@
   const leadClose = leadDialog?.querySelector('.lead-dialog-close');
   let leadReturnFocus = null;
   const leadContent = {
-    selection: { title: '为您选地', submit: '获取地块推荐' },
-    tour: { title: '预约实地参观', submit: '预约实地参观' },
-    installment: { title: '分期购地', submit: '获取咨询' },
-    promotion: { title: '参加抽奖活动', submit: '提交申请' }
+    selection: { title: '挑选地块', submit: '获取地块选集' },
+    tour: { title: '预约参观', submit: '预约参观' },
+    installment: { title: '分期付款地块', submit: '获取咨询' },
+    promotion: { title: '参加活动', submit: '提交申请' }
   };
   const setLeadIntent = (intent) => {
     const selectedIntent = leadContent[intent] ? intent : 'selection';
@@ -317,7 +317,7 @@
       ? '留下电话，我们将帮您挑选地块并介绍购买条件'
       : selectedIntent === 'promotion'
       ? '留下联系方式，团队将联系您并介绍活动参与方式。'
-      : '留下联系方式，团队将了解您的计划并建议合适的下一步。';
+      : '留下联系方式，团队将确认您的计划并提出合适的下一步。';
   };
   const closeLead = () => {
     if (leadDialog?.open) leadDialog.close();
@@ -433,9 +433,9 @@
     success.setAttribute('role', 'status');
     const successTitle = document.createElement('h3');
     successTitle.tabIndex = -1;
-    successTitle.textContent = '谢谢！我们已收到您的申请';
+    successTitle.textContent = '谢谢！您的申请已受理';
     const successText = document.createElement('p');
-    successText.textContent = '顾问将尽快与您联系。';
+    successText.textContent = '经理将于近期与您联系。';
     success.append(successTitle, successText);
     demoForm.append(success);
     // Backend integration: dispatch only after the server confirms receipt.
@@ -460,9 +460,9 @@
       event.preventDefault();
       if (demoForm.classList.contains('is-loading') || demoForm.classList.contains('is-submitted')) return;
       if (phone && !isInternationalPhone(phone.value)) {
-        phone.setCustomValidity('请输入含国家区号的电话号码，例如 +86 138 0013 8000');
+        phone.setCustomValidity('请输入完整电话号码（含国家区号）');
         phone.setAttribute('aria-invalid', 'true');
-        if (error) error.textContent = '请输入含国家区号的电话号码，例如 +86 138 0013 8000';
+        if (error) error.textContent = '请输入完整电话号码（含国家区号）';
       }
       const invalid = demoForm.querySelector(':invalid');
       if (invalid) {
@@ -496,7 +496,7 @@
   const tourSubmit = tourForm?.querySelector('[data-tour-submit]');
   const syncTourSubmit = () => {
     const intent = tourForm?.querySelector('input[name="intent"]:checked')?.value;
-    if (tourSubmit) tourSubmit.textContent = intent === 'video' ? '获取地块视频' : '预约实地参观';
+    if (tourSubmit) tourSubmit.textContent = intent === 'video' ? '获取地块视频' : '预约参观';
   };
   tourForm?.querySelectorAll('input[name="intent"]').forEach((option) => option.addEventListener('change', syncTourSubmit));
   syncTourSubmit();

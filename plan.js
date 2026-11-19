@@ -33,11 +33,11 @@
     card.hidden=!q;
     root.querySelector('.plan-toolbar').hidden=!q;
     root.querySelector('.plan-legend').hidden=!q;
-    root.querySelector('#plan-help').textContent=q ? '在图上选择可售地块，或打开列表。' : '同一项目的三个片区。点击图上的片区，或在上方选择。';
-    root.querySelector('#picker-catalog-link').textContent = state.selected ? '根据已选地块获取推荐 →' : q ? '获取该片区的地块推荐 →' : '获取地块推荐 →';
+    root.querySelector('#plan-help').textContent=q ? '选择图上的可用地块，或打开列表。' : '同一项目的三个片区。点击图上的片区，或在上方选择。';
+    root.querySelector('#picker-catalog-link').textContent = state.selected ? '获取考虑已选地块的选集 →' : q ? '获取该片区的地块选集 →' : '获取地块选集 →';
     root.querySelector('#quarter-summary').textContent = q
-      ? `${q.description} 各地块的可售情况及限制以文件核实为准。`
-      : '尼科洛科尔马、杰格佳里齐和中央区组成新维索卡的三个片区。选择片区查看地块。';
+      ? `${q.description} 具体地块的可用情况及限制根据文件确认。`
+      : '尼科洛科尔马、杰格佳里齐和中央部分——“新维索卡”的三个片区。选择片区，进入地块。';
     svg.setAttribute('viewBox',q ? `${q.bounds[0]-20} ${q.bounds[1]-30} ${q.bounds[2]+40} ${q.bounds[3]+60}` : '0 0 900 480');
     svg.innerHTML = `<rect width="900" height="480" fill="#edf0e5"/><path d="M0 0H900V75Q600 110 0 70Z" fill="#c3d3bb"/><text x="450" y="42" text-anchor="middle" class="landmark">森林 · 示意位置</text><path d="M0 435Q450 400 900 435V480H0Z" fill="#bbd6df"/><text x="450" y="466" text-anchor="middle" class="landmark">水域 · 示意位置</text><path d="M10 420H890" stroke="#c4bda9" stroke-width="14"/><text x="450" y="424" text-anchor="middle" class="road-label">入口 · 示意</text>`;
     for (const district of data.quarters) {
@@ -50,14 +50,14 @@
       const [x,y,w,h]=plot.rect;
       const active=plot.status==='free' && visible.includes(plot);
       const outside=state.quarter!=='all' && plot.quarter!==state.quarter;
-      svg.insertAdjacentHTML('beforeend',`<g class="plot ${plot.status} ${state.selected===plot.id?'selected':''} ${outside?'outside':''}" ${active?`role="button" tabindex="0" data-plot="${plot.id}"`: 'role="img"'} aria-label="${displayId(plot.id)}, ${plot.area} ×100平方米, ${plot.status==='free'?'可售':'已售'} — 示意数据"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="5"/><text x="${x+w/2}" y="${y+h/2-5}" text-anchor="middle">${displayId(plot.id)}</text><text class="plot-status" x="${x+w/2}" y="${y+h/2+18}" text-anchor="middle">${plot.status==='free'?'可售':'已售'}</text></g>`);
+      svg.insertAdjacentHTML('beforeend',`<g class="plot ${plot.status} ${state.selected===plot.id?'selected':''} ${outside?'outside':''}" ${active?`role="button" tabindex="0" data-plot="${plot.id}"`: 'role="img"'} aria-label="${displayId(plot.id)}, ${plot.area} ×100平方米, ${plot.status==='free'?'可用':'已售'} — 示意数据"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="5"/><text x="${x+w/2}" y="${y+h/2-5}" text-anchor="middle">${displayId(plot.id)}</text><text class="plot-status" x="${x+w/2}" y="${y+h/2+18}" text-anchor="middle">${plot.status==='free'?'可用':'已售'}</text></g>`);
     }
-    root.querySelector('#result-count').textContent=q ? `示意地块： ${visible.length}. 可售： ${visible.filter(p=>p.status==='free').length}.` : '项目总平面图 · 3个片区';
+    root.querySelector('#result-count').textContent=q ? `示意地块： ${visible.length}. 可用： ${visible.filter(p=>p.status==='free').length}.` : '项目总体规划 · 3个片区';
     root.querySelector('#empty-plots').hidden=!q || visible.some(p=>p.status==='free');
-    list.innerHTML=visible.map(p=>`<article class="list-plot"><div><h4>${displayId(p.id)}</h4><p>${quarter(p.quarter).name} · ${p.area} ×100平方米（示意）</p><p>${p.status==='free'?'可售':'已售'} · 演示状态</p></div>${p.status==='free'?`<button type="button" class="button secondary" data-list-plot="${p.id}">选择地块</button>`:'<span class="small">不可选择</span>'}</article>`).join('');
+    list.innerHTML=visible.map(p=>`<article class="list-plot"><div><h4>${displayId(p.id)}</h4><p>${quarter(p.quarter).name} · ${p.area} ×100平方米（示意）</p><p>${p.status==='free'?'可用':'已售'} · 演示状态</p></div>${p.status==='free'?`<button type="button" class="button secondary" data-list-plot="${p.id}">选择地块</button>`:'<span class="small">不可选择</span>'}</article>`).join('');
     const plot=data.plots.find(p=>p.id===state.selected);
-    card.innerHTML=plot ? `<button class="detail-close" type="button" aria-label="关闭地块信息卡">×</button><h3>${displayId(plot.id)}</h3><p>${quarter(plot.quarter).name}</p><p class="demo-status">可售 — 演示状态</p><dl class="plot-facts"><div><dt>面积（示意）</dt><dd>${plot.area} ×100平方米</dd></div><div><dt>总价</dt><dd>${money(plot.total)}</dd></div><div><dt>每100平方米价格</dt><dd>${money(plot.pricePerSotka)}</dd></div><div><dt>项目用途</dt><dd>独栋住宅建设 · 地块信息须依俄罗斯不动产统一登记簿核实</dd></div></dl><div class="detail-photo">暂未提供地块照片</div><p class="small">编号、面积、边界及可售情况均为流程测试用的虚构数据，不构成销售要约。</p><button type="button" class="text-link show-on-plan">在图上显示</button><a class="button tour-plot" href="#tour-form">预约查看地块 ↗</a>`
-      : '<h3>选择可售地块</h3><p>点击图上或列表中的地块，此处将显示地块信息。</p><p class="small">此处所有地块和状态均为演示数据。</p>';
+    card.innerHTML=plot ? `<button class="detail-close" type="button" aria-label="关闭地块信息卡">×</button><h3>${displayId(plot.id)}</h3><p>${quarter(plot.quarter).name}</p><p class="demo-status">可用 — 演示状态</p><dl class="plot-facts"><div><dt>面积（示意）</dt><dd>${plot.area} ×100平方米</dd></div><div><dt>总价</dt><dd>${money(plot.total)}</dd></div><div><dt>每100平方米价格</dt><dd>${money(plot.pricePerSotka)}</dd></div><div><dt>项目用途</dt><dd>个人住宅建设 · 地块信息根据不动产统一登记簿核实</dd></div></dl><div class="detail-photo">暂未提供地块照片</div><p class="small">编号、面积、边界和可用情况均为测试流程而虚构。这不是销售要约。</p><button type="button" class="text-link show-on-plan">在图上显示</button><a class="button tour-plot" href="#tour-form">预约查看地块 ↗</a>`
+      : '<h3>选择可用地块</h3><p>点击图上或列表中的地块。此处将显示其参数。</p><p class="small">本区块中的所有地块和状态均为演示。</p>';
     root.querySelector('#plan-panel').hidden=state.view!=='plan';
     list.hidden=!q || state.view!=='list';
     root.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===state.view)));

@@ -71,6 +71,6 @@
     const trigger=e.target.closest('[data-lead-intent]');if(!trigger)return;
     const form=document.querySelector('[data-lead-form]');if(!form)return;
     form.querySelector('[data-selected-quarter]')?.remove();
-    if(trigger.dataset.planQuarter){const field=document.createElement('input');field.type='hidden';field.name='quarter';field.value=trigger.dataset.planQuarter;field.dataset.selectedQuarter='';form.append(field);document.querySelector('#lead-dialog-title').textContent=`为您选地 — ${field.value}`;}
+    if(trigger.dataset.planQuarter){const field=document.createElement('input');field.type='hidden';field.name='quarter';field.value=trigger.dataset.planQuarter;field.dataset.selectedQuarter='';form.append(field);document.querySelector('#lead-dialog-title').textContent=`挑选地块 — ${field.value}`;}
   });
 })();

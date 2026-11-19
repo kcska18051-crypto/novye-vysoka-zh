@@ -31,7 +31,7 @@
 .map-card-close::after { transform: rotate(-45deg); }
 .map-card-media { aspect-ratio: 3/2; overflow: hidden; border-radius: 20px; background: #e7ede3; }
 .map-card-media img { width: 100%; height: 100%; object-fit: cover; }
-.map-card-media.is-fallback::after { content: "Фотография будет добавлена"; height: 100%; display: grid; place-items: center; padding: 20px; color: #718079; font-size: 12px; text-align: center; }
+.map-card-media.is-fallback::after { content: "将添加照片"; height: 100%; display: grid; place-items: center; padding: 20px; color: #718079; font-size: 12px; text-align: center; }
 .map-card-media.is-fallback img { display: none; }
 .map-card-type { display: inline-block; margin-top: 22px; color: #65b32e; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .map-card h3 { margin-top: 9px; font-size: 31px; line-height: 1.05; }
