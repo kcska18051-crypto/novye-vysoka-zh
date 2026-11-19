@@ -13,9 +13,9 @@ test('uses the current approved Chinese hero and lifestyle message', () => {
   assert.match(html, /选择一个片区<br>建造自己的家/);
 });
 
-test('keeps five-quarter scope with four confirmed named map regions', () => {
-  assert.match(html, /<h2>5个片区<\/h2>/);
-  assert.match(html, /“新维索卡”项目的五个片区/);
+test('keeps four-quarter scope with four confirmed named map regions', () => {
+  assert.match(html, /<h2>4个片区<\/h2>/);
+  assert.match(html, /“新维索卡”项目的四个片区/);
   const regions = [...html.matchAll(/data-map-quarter="([^"]+)"/g)].map(m => m[1]);
   assert.deepEqual(regions, ['degtyaritsy', 'chernaya', 'vysoka', 'nikolo']);
   assert.doesNotMatch(html, /data-map-quarter="quarter-5"/);

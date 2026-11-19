@@ -10,3 +10,5 @@
 - Формы демонстрационные. Не показывать успешную отправку автоматически без подтверждения бэкенда. Звук только по нажатию.
 - Перед публикацией: тесты, git diff --check, HTTP, консоль, desktop/mobile, галереи, маршруты, планы и формы.
 - Старый PROJECT-CONTEXT.md и документы до ноября — архив исходной разработки, а не инструкции к публикации русской версии.
+
+- Current user-approved scope (19 November 2026): four neighbourhoods. Change only the project count; the five company reasons and dormant demo datasets remain unchanged.
