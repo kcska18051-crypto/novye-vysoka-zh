@@ -5,11 +5,11 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   const unknown = '请咨询';
   const quarters = [
-    { id: 'quarter-1', name: '分区 1', category: 'quarters', x: 33, y: 28, image: 'assets/quarters/quarter-1.webp', pricePerSotka: unknown, free: unknown, reserved: unknown, sold: unknown, distances: [], description: '总平面图的北部。打开图纸查看地块位置。' },
-    { id: 'quarter-2', name: '分区 2', category: 'quarters', x: 30, y: 51, image: 'assets/quarters/quarter-2.webp', pricePerSotka: unknown, free: unknown, reserved: unknown, sold: unknown, distances: [], description: '总平面图的西部。打开图纸查看地块位置。' },
-    { id: 'quarter-3', name: '分区 3', category: 'quarters', x: 51, y: 66, image: 'assets/quarters/quarter-3.webp', pricePerSotka: unknown, free: unknown, reserved: unknown, sold: unknown, distances: [], description: '中央道路沿线的地块。请向项目团队咨询最新可售情况。' },
-    { id: 'quarter-4', name: '分区 4', category: 'quarters', x: 76, y: 72, image: 'assets/quarters/quarter-4.webp', pricePerSotka: unknown, free: unknown, reserved: unknown, sold: unknown, distances: [], description: '总平面图的东部。打开图纸查看地块位置。' },
-    { id: 'quarter-5', name: '分区 5', category: 'quarters', x: 83, y: 88, image: 'assets/quarters/quarter-5.webp', pricePerSotka: unknown, free: unknown, reserved: unknown, sold: unknown, distances: [], description: '总平面图的东南部。请向项目团队咨询最新可售情况。' }
+    { id: 'quarter-1', name: '片区 1', category: 'quarters', x: 33, y: 28, image: 'assets/quarters/quarter-1.webp', pricePerSotka: unknown, free: unknown, reserved: unknown, sold: unknown, distances: [], description: '总平面图的北部。打开图纸查看地块位置。' },
+    { id: 'quarter-2', name: '片区 2', category: 'quarters', x: 30, y: 51, image: 'assets/quarters/quarter-2.webp', pricePerSotka: unknown, free: unknown, reserved: unknown, sold: unknown, distances: [], description: '总平面图的西部。打开图纸查看地块位置。' },
+    { id: 'quarter-3', name: '片区 3', category: 'quarters', x: 51, y: 66, image: 'assets/quarters/quarter-3.webp', pricePerSotka: unknown, free: unknown, reserved: unknown, sold: unknown, distances: [], description: '中央道路沿线的地块。请向项目团队咨询最新可售情况。' },
+    { id: 'quarter-4', name: '片区 4', category: 'quarters', x: 76, y: 72, image: 'assets/quarters/quarter-4.webp', pricePerSotka: unknown, free: unknown, reserved: unknown, sold: unknown, distances: [], description: '总平面图的东部。打开图纸查看地块位置。' },
+    { id: 'quarter-5', name: '片区 5', category: 'quarters', x: 83, y: 88, image: 'assets/quarters/quarter-5.webp', pricePerSotka: unknown, free: unknown, reserved: unknown, sold: unknown, distances: [], description: '总平面图的东南部。请向项目团队咨询最新可售情况。' }
   ];
 
   const objects = [
@@ -29,7 +29,7 @@
   return Object.freeze({
     categories: Object.freeze([
       { id: 'all', label: '全部' },
-      { id: 'quarters', label: '分区' },
+      { id: 'quarters', label: '片区' },
       { id: 'nature', label: '自然' },
       { id: 'infrastructure', label: '配套设施' },
       { id: 'transport', label: '交通' }
